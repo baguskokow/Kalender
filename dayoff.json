@@ -1,0 +1,27 @@
+[
+  {
+    "tanggal": "2025-05-1",
+    "keterangan": "Hari Buruh Internasional",
+    "is_cuti": false
+  },
+  {
+    "tanggal": "2025-05-12",
+    "keterangan": "Hari Raya Waisak 2569 BE",
+    "is_cuti": false
+  },
+  {
+    "tanggal": "2025-05-13",
+    "keterangan": "Cuti Bersama Hari Raya Waisak 2569 BE",
+    "is_cuti": true
+  },
+  {
+    "tanggal": "2025-05-29",
+    "keterangan": "Kenaikan Yesus Kristus",
+    "is_cuti": false
+  },
+  {
+    "tanggal": "2025-05-30",
+    "keterangan": "Cuti Bersama Kenaikan Yesus Kristus",
+    "is_cuti": true
+  }
+]
