@@ -11,6 +11,7 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
+#include "getdata.cpp"
 
 int getDaysInMonth(int month, int year) {
 	int February;
@@ -38,12 +39,13 @@ void printCalendar(int month, int year) {
 	std::string monthsInYear[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 	int days = 1; // days 1
+	int offDay = 17;
 	int totalDay = getDaysInMonth(month, year);
 	int dayFrom = getDayStart(month, year);
-	int offDay = 17;
 	std::string colorForeground = "\033[47m";
 	std::string fontColorBlack = "\033[31m";
 	std::string resetColor = "\033[0m";
+	bool isHoliday = false;
 
 	int totalSlot = dayFrom + totalDay;
 
@@ -54,35 +56,49 @@ void printCalendar(int month, int year) {
 	}
 
 	std::cout << "\n";
-	
+
+	getDaysOff();
+
 	for(int i = 0; i < totalSlot; i++) {
 		if(i < dayFrom) {
 			std::cout << std::setw(5) << " ";
 		} else {
-			if(days == offDay) {
-				std::cout << fontColorBlack;
-				std::cout << std::setw(5) << days;
-				std::cout << resetColor;
-			} else {
-				std::cout << std::setw(5) << days;
+			bool isHoliday = false;
+
+			for(int j = 0; j < dayOffTotal; j++) {
+				if(dayOff[j] == days) {
+					std::cout << fontColorBlack;
+					std::cout << std::setw(5) << days;
+					std::cout << resetColor;
+					isHoliday = true;
+					break;
+				}
 			}
+		
+			if(!isHoliday) {
+				std::cout << std::setw(5) << days;
+			}			
+
 			days++;
 		}
-
+		
+		
 		if((i + 1) % 7 == 0) {
 			std::cout << "\n";
 		}
 	}
 
 	std::cout << "\n\n";
-	std::cout << offDay << " " << monthsInYear[month - 1] << ": Hari Proklamasi Kemerdekaan RI\n";
+	printDateOff();
 
 }
 
 int main() {
-	int month = 8; 
+	int month = 5; 
 	int year = 2025; // 2025
 
+	readDataFromJson();
+	getDaysOff();
 	printCalendar(month, year);
 
 	return 0;
